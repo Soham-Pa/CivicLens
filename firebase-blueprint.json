@@ -1,0 +1,85 @@
+{
+  "entities": {
+    "Report": {
+      "title": "Report",
+      "description": "A citizen civic issue report with evidence photo, AI analysis, and geo-location details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique report reference ID (e.g. CL-2026-XXXXXX)"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Image data URL of the civic defect"
+        },
+        "is_civic_issue": {
+          "type": "boolean",
+          "description": "Whether the photo depicts a civic infrastructure problem"
+        },
+        "issue_type": {
+          "type": "string",
+          "description": "Title or type of the issue"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["pothole", "garbage", "streetlight", "drain", "waterlogging", "footpath", "other"],
+          "description": "Standard category of the civic hazard"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["Low", "Medium", "High", "Critical"],
+          "description": "Assessed hazard severity level"
+        },
+        "severity_reason": {
+          "type": "string",
+          "description": "Reasoning for the assigned severity"
+        },
+        "description": {
+          "type": "string",
+          "description": "Formal complaint petition text"
+        },
+        "suggested_department": {
+          "type": "string",
+          "description": "Designated municipal department"
+        },
+        "risk_to_public": {
+          "type": "string",
+          "description": "Public risk factors"
+        },
+        "confidence": {
+          "type": "number",
+          "description": "Confidence score between 0 and 1"
+        },
+        "location": {
+          "type": "object",
+          "description": "Geographical coordinates and address"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of creation"
+        },
+        "formattedTimestamp": {
+          "type": "string",
+          "description": "Formatted date and time in IST"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Submitted", "In Review", "Resolved"],
+          "description": "Current redressal status"
+        },
+        "statusTimeline": {
+          "type": "array",
+          "description": "Timeline log of status progression"
+        }
+      },
+      "required": ["id", "imageUrl", "is_civic_issue", "issue_type", "category", "severity", "description", "status"]
+    }
+  },
+  "firestore": {
+    "/reports/{reportId}": {
+      "schema": "Report",
+      "description": "Collection of all citizen civic issue reports and grievance petitions."
+    }
+  }
+}
